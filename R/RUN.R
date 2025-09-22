@@ -98,7 +98,7 @@ source("R/climate.detrend.R")
 # Starting years (start of climatic data): CZ = 1960, ES = 1950, CA = 1940
 # Ending years (last year of chronology or climatic data): CZ = 2016, ES = 2001, CA = 2016
 
-random.par <- randomization(iter = 2500)
+random.par <- randomization(iter = 4500)
 tuning <- VSLite.iterative(parameters = random.par, obs.chron = spruceCZ.chronology, chron.variant = "res",
                  syear = 1960, eyear = 2016,
                  phi = 49.75, Pinput = Prec.CZ, Tinput = Temp.CZ,
@@ -153,3 +153,4 @@ phenology(simulation)
 # Model residuals (might store interesting environmental information - Kirdyanov et al. 2020: Ecology Letters)
 observed <- tuning$obs.trw[as.numeric(rownames(tuning$obs.trw)) %in% c(simulation$syear : simulation$eyear), "res"]
 plot((observed - mean(observed))/sd(observed) - t(simulation$mod.trw) ~ c(simulation$syear : simulation$eyear), type = "l")
+
